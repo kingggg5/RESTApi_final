@@ -15,6 +15,7 @@ router.get('/', async (req, res) => {
     res.setHeader('x-total-count', totalCount);
     res.json(users);
   } catch (err) {
+    console.error('Error fetching users:', err);
     res.status(500).json({ message: err.message });
   }
 });
@@ -26,6 +27,7 @@ router.get('/:userId', async (req, res) => {
     if (!user) return res.status(404).json({ message: 'User not found' });
     res.json(user);
   } catch (err) {
+    console.error('Error fetching user:', err);
     res.status(500).json({ message: err.message });
   }
 });
@@ -46,6 +48,7 @@ router.post('/', async (req, res) => {
     await user.save();
     res.status(201).json(user);
   } catch (err) {
+    console.error('Error creating user:', err);
     res.status(500).json({ message: err.message });
   }
 });
@@ -63,6 +66,7 @@ router.put('/:userId', async (req, res) => {
     if (!user) return res.status(404).json({ message: 'User not found' });
     res.json(user);
   } catch (err) {
+    console.error('Error updating user:', err);
     res.status(500).json({ message: err.message });
   }
 });
@@ -74,6 +78,7 @@ router.delete('/:userId', async (req, res) => {
     if (!user) return res.status(404).json({ message: 'User not found' });
     res.json({ message: 'User deleted' });
   } catch (err) {
+    console.error('Error deleting user:', err);
     res.status(500).json({ message: err.message });
   }
 });
